@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "648437378605",
+    "project_id": "worktracker-1e0fa",
+    "storage_bucket": "worktracker-1e0fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648437378605:android:ed01be4d024421e62e92a4",
+        "android_client_info": {
+          "package_name": "com.example.work_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648437378605-u714be8g2mltkgultejcdc277jr6u693.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.work_tracker",
+            "certificate_hash": "453b832dc156f0a9ead166fe134edad737eccf48"
+          }
+        },
+        {
+          "client_id": "648437378605-404b90er34ka86jh8vc0q241vvocj3nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvq3vWY-8zo6Oy_pH7qioWNDXJZbeh-Ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648437378605-404b90er34ka86jh8vc0q241vvocj3nt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
