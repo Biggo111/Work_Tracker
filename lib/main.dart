@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:work_tracker/app/core/services/firebase_service.dart';
+import 'package:work_tracker/app/screens/home_screen/home_screen.dart';
 import 'package:work_tracker/app/screens/signup_login_screens/auth_page.dart';
 
 void main() async{
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
-      home: const AuthPage(),
+      home: AuthPage(),
     );
   }
 }
