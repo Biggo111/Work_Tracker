@@ -10,7 +10,7 @@ class FirebaseAuthMethods {
 // String password;
   FirebaseAuthMethods(this._auth);
 
-  Future<void> signUp({
+  Future<bool> signUp({
     required String email,
     required String password,
     required String name,
@@ -28,7 +28,9 @@ class FirebaseAuthMethods {
 
     } on FirebaseAuthException catch (e) {
       Logger().i(e);
+      return false;
     }
+    return true;
   }
 
 

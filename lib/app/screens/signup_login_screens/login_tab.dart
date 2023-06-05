@@ -177,6 +177,24 @@ class _LoginTabState extends State<LoginTab> {
                         MaterialPageRoute(builder: (context) => HomeScreen()));
                   } else {
                     Logger().i("Wrong email or password");
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Please Verify!'),
+                          content: const Text(
+                              'Wrong Email or Password'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                     errorMessage();
                   }
                 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:work_tracker/app/constants/constants.dart';
+import 'package:work_tracker/app/screens/signup_login_screens/login_tab.dart';
 
 import '../../core/services/firebase_auth_methods.dart';
 
@@ -17,13 +18,11 @@ class _SignupTabState extends State<SignupTab> {
   final signupPasswordController = TextEditingController();
   final signupConfirmpasswordController = TextEditingController();
 
-
-
-  void signupUser()async{
-    FirebaseAuthMethods(FirebaseAuth.instance).signUp(
-        email: signupEmailController.text.trim(),
-        password: signupPasswordController.text.trim(),
-        name: signupNameController.text.trim(),
+  Future<bool> signupUser() async {
+    return FirebaseAuthMethods(FirebaseAuth.instance).signUp(
+      email: signupEmailController.text.trim(),
+      password: signupPasswordController.text.trim(),
+      name: signupNameController.text.trim(),
     );
   }
 
@@ -49,7 +48,7 @@ class _SignupTabState extends State<SignupTab> {
           controller: signupNameController,
           onChanged: (String value) {},
         ),
-         const SizedBox(
+        const SizedBox(
           height: 30,
         ),
         TextField(
@@ -108,47 +107,91 @@ class _SignupTabState extends State<SignupTab> {
           height: 45,
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {
-              if(signupNameController.text.isEmpty || signupEmailController.text.isEmpty || signupPasswordController.text.isEmpty || signupConfirmpasswordController.text.isEmpty){
+            onPressed: () async {
+              if (signupNameController.text.isEmpty ||
+                  signupEmailController.text.isEmpty ||
+                  signupPasswordController.text.isEmpty ||
+                  signupConfirmpasswordController.text.isEmpty) {
                 showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Alert!!'),
-                    content: const Text('Fill up all the fields'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
-              }
-              else if(signupPasswordController.text != signupConfirmpasswordController.text){
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Alert!!'),
+                      content: const Text('Fill up all the fields'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else if (signupPasswordController.text !=
+                  signupConfirmpasswordController.text) {
                 showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Alert!!'),
-                    content: const Text('Password and confirm password is not matching'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Alert!!'),
+                      content: const Text(
+                          'Password and confirm password is not matching'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                bool check = await signupUser();
+                if (check == true) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Signed Up successfully'),
+                        content: const Text('Please verify before login!'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginTab()),
+                              );
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
                   );
-                },
-              );
-              }
-              else{
-                signupUser();
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Error!'),
+                        content: const Text('Please Try Again'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               }
             },
             style: ElevatedButton.styleFrom(
