@@ -17,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<QuerySnapshot<Map<String, dynamic>>?> fatchData() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
 
+    // Get the user's document from 'User Info' collection
     DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
         .instance
         .collection('User Info')
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       String username = userData!['name'];
       Logger().i(username);
 
+      // Get the user's collection using their username
       QuerySnapshot<Map<String, dynamic>> collectionSnapshot =
           await FirebaseFirestore.instance.collection(username).get();
 
@@ -172,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 String userId = FirebaseAuth.instance.currentUser!.uid;
 
+                // Get the user's document from 'User Info' collection
                 DocumentSnapshot<Map<String, dynamic>> snapshot =
                     await FirebaseFirestore.instance
                         .collection('User Info')
@@ -181,6 +184,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.exists) {
                   Map<String, dynamic>? userData = snapshot.data();
                   String username = userData!['name'];
+
+                  // Update the task document in the user's collection
                   await FirebaseFirestore.instance
                       .collection(username)
                       .doc(userId)
@@ -206,6 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> deleteTask(String taskId) async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
 
+    // Get the user's document from 'User Info' collection
     DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
         .instance
         .collection('User Info')
@@ -215,6 +221,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (snapshot.exists) {
       Map<String, dynamic>? userData = snapshot.data();
       String username = userData!['name'];
+
+      // Delete the task document from the user's collection
       await FirebaseFirestore.instance
           .collection(username)
           .doc(taskId)

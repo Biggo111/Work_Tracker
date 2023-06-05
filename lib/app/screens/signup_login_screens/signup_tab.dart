@@ -19,6 +19,8 @@ class _SignupTabState extends State<SignupTab> {
   final signupConfirmpasswordController = TextEditingController();
 
   Future<bool> signupUser() async {
+
+    // Sign up user using FirebaseAuthMethods
     return FirebaseAuthMethods(FirebaseAuth.instance).signUp(
       email: signupEmailController.text.trim(),
       password: signupPasswordController.text.trim(),
@@ -150,7 +152,7 @@ class _SignupTabState extends State<SignupTab> {
                   },
                 );
               } else {
-                bool check = await signupUser();
+                bool check = await signupUser(); //Calling the Method to Signup
                 if (check == true) {
                   showDialog(
                     context: context,

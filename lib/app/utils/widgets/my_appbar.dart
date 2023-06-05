@@ -37,9 +37,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             leading: const Icon(Icons.logout),
             title: const Text("Logout"),
             onTap: () {
+
+              // Sign out the user
               FirebaseAuth.instance.signOut();
+
+              // Close the menu
               Navigator.pop(context);
 
+              // Navigate to the authentication page
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const AuthPage()),

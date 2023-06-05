@@ -12,6 +12,8 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+
+    // Create a TabController with 2 tabs
     TabController tabController = TabController(length: 2, vsync: this);
     return SafeArea(
       child: WillPopScope(
@@ -51,6 +53,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                               color: Colors.white,
                             ),
                             child: TabBar(
+                              // Customize the appearance of the TabBar
                               indicator: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40),
                                 color: scaffoldBackgroundColor,
@@ -83,13 +86,8 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
                         child: TabBarView(
                           controller: tabController,
                           children: const [
-                            LoginTab(),
-                            // ListView.builder(
-                            //   itemCount: 1,
-                            //   itemBuilder: (_,index){
-                            //   return const LoginTab();
-                            // }),
-                            SignupTab(),
+                            LoginTab(),  //Login page Tab
+                            SignupTab(), //Signup page Tab
                           ],
                         ),
                       )

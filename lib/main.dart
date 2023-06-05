@@ -5,7 +5,11 @@ import 'package:work_tracker/app/screens/signup_login_screens/auth_page.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase services
   await FirebaseService.enableFirebase();
+
+  // Run the app
   runApp(const MyApp());
 }
 

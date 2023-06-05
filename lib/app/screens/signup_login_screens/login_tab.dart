@@ -18,9 +18,9 @@ class LoginTab extends StatefulWidget {
 class _LoginTabState extends State<LoginTab> {
   final loginEmailController = TextEditingController();
   final loginPasswordController = TextEditingController();
-  String? userType;
 
   Future<bool> loginUser() async {
+    // Login user using FirebaseAuthMethods
     bool isLogin = await FirebaseAuthMethods(FirebaseAuth.instance).login(
       email: loginEmailController.text.trim(),
       password: loginPasswordController.text.trim(),
@@ -29,6 +29,7 @@ class _LoginTabState extends State<LoginTab> {
   }
 
   void passwordReset() {
+    // Call the forgotPassword method of FirebaseAuthMethods to initiate password reset
     FirebaseAuthMethods(FirebaseAuth.instance).forgotPassword(
       email: loginEmailController.text.trim(),
     );
@@ -120,7 +121,7 @@ class _LoginTabState extends State<LoginTab> {
                       },
                     );
                   } else {
-                    passwordReset();
+                    passwordReset(); //Calling The Method to Reset The Password
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -171,7 +172,7 @@ class _LoginTabState extends State<LoginTab> {
                     },
                   );
                 } else {
-                  bool check = await loginUser();
+                  bool check = await loginUser(); //Calling The Method for Login Operation
                   if (check == true) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -195,7 +196,7 @@ class _LoginTabState extends State<LoginTab> {
                         );
                       },
                     );
-                    errorMessage();
+                    errorMessage(); //Showing Error Message
                   }
                 }
               },
